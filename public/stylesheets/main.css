@@ -1,0 +1,13 @@
+body {
+    background-color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-xl {
+    padding: 18px 28px;
+    font-size: 30px;
+    border-radius: 8px;
+}
