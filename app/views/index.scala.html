@@ -3,14 +3,15 @@
 
     <div class="container" ng-controller="ConfiguratorCtrl">
 
-        <div>
-            <h1 class="text-center" style="color:#FFF">Bref. Je configure mon épisode...</h1>
+        <div class="row">
+            <img src='@routes.Assets.at("images/logo40ansWeb.png")'>
+            <h1 class="text-center" style="color:#FFF">Vidéo personnalisée</h1>
         </div>
 
-        <div id="video" style="height:360px;">
+        <div class="row" id="video" style="height:360px;">
 
             <div class="text-center" ng-show="!activated">
-                <img  src="resources/splash.png" width="640px" height="360px"/>
+                <img  src='@routes.Assets.at("images/visuel40ans.png")' width="640px" height="360px"/>
             </div>
 
             <div id="content" ng-show="hasFlash && activated">
@@ -33,41 +34,39 @@
         </div>
 
 
-        <div>
-
-            <br/>
+        <div class="row">
 
             <div class="text-center">
-                <button class="btn btn-primary btn-xl " ng-click="generate()">Générer</button>
+                <button class="btn btn-primary btn-lg " ng-click="generate()">Générer une autre vidéo</button>
             </div>
 
-            <br/>
+            @*<div class="panel panel-default" ng-repeat="vp in vps" >*@
+                @*<div class="panel-heading" ng-click="vp.visible=!vp.visible">*@
+                    @*<h3 class="panel-title">{{vp.name}}</h3>*@
+                @*</div>*@
 
-            <div class="panel panel-default" ng-repeat="vp in vps" >
-                <div class="panel-heading" ng-click="vp.visible=!vp.visible">
-                    <h3 class="panel-title">{{vp.name}}</h3>
-                </div>
+                @*<div ng-class="{collapse: !vp.visible}">*@
+                    @*<div class="panel-body btn-group">*@
+                        @*<button*@
+                        @*ng-repeat="option in vp.options"*@
+                        @*type="button"*@
+                        @*class="btn"*@
+                        @*ng-class="{'btn-success': vp.selected === option.id , 'btn-default': vp.selected != option.id}"*@
+                        @*ng-click="vp.selected=option.id">*@
 
-                <div ng-class="{collapse: !vp.visible}">
-                    <div class="panel-body btn-group">
-                        <button
-                        ng-repeat="option in vp.options"
-                        type="button"
-                        class="btn"
-                        ng-class="{'btn-success': vp.selected === option.id , 'btn-default': vp.selected != option.id}"
-                        ng-click="vp.selected=option.id">
+                            @*<img src="{{option.poster}}" height="45" width="80" >*@
 
-                            <img src="{{option.poster}}" height="45" width="80" >
+                        @*</button>*@
+                    @*</div>*@
 
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
+                @*</div>*@
+            @*</div>*@
 
         </div>
 
+        @*<div class="row">*@
+            @*<img src='@routes.Assets.at("images/SloganPageDesVideos.png")'>*@
+        @*</div>*@
 
 
     </div>
