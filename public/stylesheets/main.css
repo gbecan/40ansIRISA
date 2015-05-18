@@ -11,3 +11,7 @@ body {
     font-size: 30px;
     border-radius: 8px;
 }
+
+.row {
+    margin-top: 20px;
+}

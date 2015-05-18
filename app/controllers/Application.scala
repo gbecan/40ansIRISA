@@ -43,17 +43,18 @@ object Application extends Controller {
     val sortedParameters = parameters.toList.sortBy(t => t._1.substring(2).toInt)
     Logger.info("Request(" + sortedParameters.map(p => p._2(0)).mkString(",") + ")")
 
-    val playListContent = for ((vp, option) <- sortedParameters) yield {
-      val videos = Source.fromFile("resources/options-by-vp/" + vp + "/" + option(0) + ".txt").getLines().mkString("\n")
-      "#EXT-X-DISCONTINUITY\n" + videos
-        //.replaceAll(".ts",".webm")
-        .replaceAll("http://bref30cdn.wildmoka.com/vidv2/","resources/videos/")
-    }
 
 
-    val playList = "#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-ALLOW-CACHE:YES\n#EXT-X-TARGETDURATION:15\n" +
-      playListContent.toList.mkString("\n") +
-      "\n#EXT-X-ENDLIST"
+    val length = "15"
+    val videoPath = "assets/videos/vp0/output.ts"
+
+    val playList = List(
+      "#EXTM3U",
+      "#EXTINF:" + length,
+      videoPath).mkString("\n")
+
+
+
     Ok(playList)
   }
 

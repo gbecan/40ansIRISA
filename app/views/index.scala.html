@@ -4,8 +4,9 @@
     <div class="container" ng-controller="ConfiguratorCtrl">
 
         <div class="row">
-            <img src='@routes.Assets.at("images/logo40ansWeb.png")'>
-            <h1 class="text-center" style="color:#FFF">Vidéo personnalisée</h1>
+            <h1 class="text-center" style="color:#FFF">
+                <img src='@routes.Assets.at("images/logo40ansWeb.png")' height="80px"> - Vidéo personnalisée
+            </h1>
         </div>
 
         <div class="row" id="video" style="height:360px;">
@@ -29,7 +30,7 @@
 
             <div class="text-center" ng-if="!hasFlash && activated">
                 <video id="videoPlayer" src="" autoplay autobuffer controls width="640px" height="360px" />
-                <!--<video id="videoPlayer" src="assets/test.m3u8" autoplay autobuffer controls width="640px" height="360px" />-->
+                @*<video id="videoPlayer" src="assets/test.m3u8" autoplay autobuffer controls width="640px" height="360px" />*@
             </div>
         </div>
 
