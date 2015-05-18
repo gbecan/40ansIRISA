@@ -15,7 +15,7 @@
                 <img  src='@routes.Assets.at("images/visuel40ans.png")' width="640px" height="360px"/>
             </div>
 
-            <div id="content" ng-show="hasFlash && activated">
+            <div id="content" ng-show="activated">
                 <script type="text/javascript" src="assets/flash/flowplayer.ipad-3.2.12.min.js"></script>
 
                 <div style="margin:auto; width: 640px; height: 360px;">
@@ -28,10 +28,6 @@
                 </div>
             </div>
 
-            <div class="text-center" ng-if="!hasFlash && activated">
-                <video id="videoPlayer" src="" autoplay autobuffer controls width="640px" height="360px" />
-                @*<video id="videoPlayer" src="assets/test.m3u8" autoplay autobuffer controls width="640px" height="360px" />*@
-            </div>
         </div>
 
 
@@ -40,28 +36,6 @@
             <div class="text-center">
                 <button class="btn btn-primary btn-lg " ng-click="generate()">Générer une autre vidéo</button>
             </div>
-
-            @*<div class="panel panel-default" ng-repeat="vp in vps" >*@
-                @*<div class="panel-heading" ng-click="vp.visible=!vp.visible">*@
-                    @*<h3 class="panel-title">{{vp.name}}</h3>*@
-                @*</div>*@
-
-                @*<div ng-class="{collapse: !vp.visible}">*@
-                    @*<div class="panel-body btn-group">*@
-                        @*<button*@
-                        @*ng-repeat="option in vp.options"*@
-                        @*type="button"*@
-                        @*class="btn"*@
-                        @*ng-class="{'btn-success': vp.selected === option.id , 'btn-default': vp.selected != option.id}"*@
-                        @*ng-click="vp.selected=option.id">*@
-
-                            @*<img src="{{option.poster}}" height="45" width="80" >*@
-
-                        @*</button>*@
-                    @*</div>*@
-
-                @*</div>*@
-            @*</div>*@
 
         </div>
 
