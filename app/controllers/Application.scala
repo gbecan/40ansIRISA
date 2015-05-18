@@ -1,36 +1,56 @@
 package controllers
 
-import java.io.File
+import java.io.{FilenameFilter, File}
 
 import play.api._
 import play.api.mvc._
 import play.api.libs.json.Json
 
 import scala.io.Source
+import scala.util.Random
 
 object Application extends Controller {
+
+  val vps = List("vp0")
+
 
   def index = Action {
     Ok(views.html.index())
   }
 
-  val vps = List("vp0")
-
-
   def getPlaylist() = Action { request =>
-    val length = "15"
-    val videoPath = "assets/videos/vp0/bonus_canal_cut_test.ts"
 
-    val videos = (for(vp <- vps.take(1)) yield {
+    // List videos by variation point
+    val videosByVP = for (vp <- vps) yield {
+      val dir = new File("public/videos/" + vp)
+
+      val files = dir.listFiles(new FilenameFilter {
+        override def accept(file: File, s: String): Boolean = s.endsWith(".ts")
+      }).toList
+
+      val fileNames = files.map(file => file.getName).map(name => name.substring(0, name.length - 3))
+      val videos = fileNames.map(name => (name + ".ts", Source.fromFile(dir.getAbsolutePath + "/" + name + ".txt").mkString))
+
+      (vp, videos)
+    }
+
+    // Choose a configuration
+    val configuration = for ((vp, videos) <- videosByVP) yield {
+      val chosenVideo = Random.shuffle(videos).head
+      (vp, chosenVideo._1, chosenVideo._2)
+    }
+
+    // Create the playlist corresponding to the configuration
+    val playlistContent = (for((vp, name, length) <- configuration) yield {
       List(
-        "\"#EXT-X-DISCONTINUITY",
+        "#EXT-X-DISCONTINUITY",
         "#EXTINF:" + length,
-        videoPath
+        "assets/videos/" + vp + "/" + name
       )
     }).flatten
-    val playList = List("#EXTM3U") ::: videos ::: List("#EXT-X-ENDLIST")
+    val playlist = List("#EXTM3U") ::: playlistContent ::: List("#EXT-X-ENDLIST")
 
-    Ok(playList.mkString("\n"))
+    Ok(playlist.mkString("\n"))
   }
 
   def getResource(file : String) = Action {
