@@ -1,6 +1,6 @@
 package controllers
 
-import java.io.{FilenameFilter, File}
+import java.io.{FileFilter, FilenameFilter, File}
 
 import play.api._
 import play.api.mvc._
@@ -11,7 +11,7 @@ import scala.util.Random
 
 object Application extends Controller {
 
-  val vps = List("vp0")
+
 
 
   def index = Action {
@@ -19,6 +19,11 @@ object Application extends Controller {
   }
 
   def getPlaylist() = Action { request =>
+
+    val vpDir = new File("public/videos")
+    val vps = vpDir.listFiles(new FileFilter {
+      override def accept(file: File): Boolean = file.isDirectory
+    }).map(_.getName).toList
 
     // List videos by variation point
     val videosByVP = for (vp <- vps) yield {
@@ -50,7 +55,10 @@ object Application extends Controller {
     }).flatten
     val playlist = List("#EXTM3U") ::: playlistContent ::: List("#EXT-X-ENDLIST")
 
-    Ok(playlist.mkString("\n"))
+    val playlistString = playlist.mkString("\n")
+//    println(playlistString)
+
+    Ok(playlistString)
   }
 
   def getResource(file : String) = Action {
