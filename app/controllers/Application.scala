@@ -23,7 +23,7 @@ object Application extends Controller {
     val vpDir = new File("public/videos")
     val vps = vpDir.listFiles(new FileFilter {
       override def accept(file: File): Boolean = file.isDirectory
-    }).map(_.getName).toList
+    }).map(_.getName).toList.sorted
 
     // List videos by variation point
     val videosByVP = for (vp <- vps) yield {

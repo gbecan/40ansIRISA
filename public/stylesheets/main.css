@@ -15,3 +15,18 @@ body {
 .row {
     margin-top: 20px;
 }
+
+.title {
+    color: white;
+}
+
+.video-player {
+    margin: auto;
+    display: block;
+}
+
+.video-format {
+    width: 720px;
+    height: 576px
+}
+

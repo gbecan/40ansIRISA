@@ -4,28 +4,19 @@
     <div class="container" ng-controller="ConfiguratorCtrl">
 
         <div class="row">
-            <h1 class="text-center" style="color:#FFF">
+            <h1 class="text-center title" >
                 <img src='@routes.Assets.at("images/logo40ansWeb.png")' height="80px"> - Vidéo personnalisée
             </h1>
         </div>
 
-        <div class="row" id="video" style="height:360px;">
+        <div class="row">
 
             <div class="text-center" ng-show="!activated">
-                <img  src='@routes.Assets.at("images/visuel40ans.png")' width="640px" height="360px"/>
+                <img src='@routes.Assets.at("images/visuel40ans.png")' class="video-format"/>
             </div>
 
             <div id="content" ng-show="activated">
-                <script type="text/javascript" src="assets/flash/flowplayer.ipad-3.2.12.min.js"></script>
-
-                <div style="margin:auto; width: 640px; height: 360px;">
-                    <a style="display: block; width: 640px; height: 360px;" id="player"></a>
-                    <script type="text/javascript">
-                    flowplayer("player", "@routes.Assets.at("flash/flowplayer.swf")", {
-
-                    });
-                    </script>
-                </div>
+                <a class="video-player video-format" id="player"></a>
             </div>
 
         </div>
