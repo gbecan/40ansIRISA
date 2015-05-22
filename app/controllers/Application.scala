@@ -2,6 +2,7 @@ package controllers
 
 import java.io.File
 
+import play.Logger
 import play.api.mvc._
 
 import scala.util.Random
@@ -24,7 +25,7 @@ object Application extends Controller {
       }
 
 
-    println(configuration)
+    Logger.info(configuration)
 
     // Create the playlist corresponding to the configuration
     val playlistContent = (for((vp, name, length) <- configuration) yield {

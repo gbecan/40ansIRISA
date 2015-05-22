@@ -1,6 +1,7 @@
 import java.io.{FilenameFilter, FileFilter, File}
 
 import controllers.Application
+import play.Logger
 import play.api.Application
 import play.api.{Application, GlobalSettings}
 
@@ -13,7 +14,7 @@ object Global extends GlobalSettings {
 
 
   override def onStart(app: Application) {
-    println("starting")
+    Logger.info("starting")
 
     // List variation points
     val vpDir = new File("/var/www/resources/videos")
@@ -25,7 +26,7 @@ object Global extends GlobalSettings {
             !file.listFiles().isEmpty
       }).map(_.getName).toList.sorted
 
-      println("variation points: " + vps)
+      Logger.info("variation points: " + vps)
 
       // List videos by variation point
       val videosByVP = for (vp <- vps) yield {
@@ -45,6 +46,6 @@ object Global extends GlobalSettings {
       Application.videosByVP = videosByVP
     }
 
-    println("done")
+    Logger.info("done")
   }
 }
