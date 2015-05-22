@@ -20,7 +20,9 @@ object Global extends GlobalSettings {
 
     if (vpDir.exists()) {
       val vps = vpDir.listFiles(new FileFilter {
-        override def accept(file: File): Boolean = file.isDirectory
+        override def accept(file: File): Boolean =
+          file.isDirectory &&
+            !file.listFiles().isEmpty
       }).map(_.getName).toList.sorted
 
       println("variation points: " + vps)

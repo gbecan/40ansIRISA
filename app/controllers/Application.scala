@@ -17,10 +17,12 @@ object Application extends Controller {
   def getPlaylist() = Action { request =>
 
     // Choose a configuration
-    val configuration = for ((vp, videos) <- videosByVP) yield {
-      val chosenVideo = Random.shuffle(videos).head
-      (vp, chosenVideo._1, chosenVideo._2)
-    }
+    val bonus = Random.nextFloat() < 0.1
+    val configuration = for ((vp, videos) <- videosByVP if (!bonus && vp != "bonus") || (bonus && vp == "bonus")) yield {
+        val chosenVideo = Random.shuffle(videos).head
+        (vp, chosenVideo._1, chosenVideo._2)
+      }
+
 
     println(configuration)
 
@@ -35,7 +37,6 @@ object Application extends Controller {
     val playlist = List("#EXTM3U") ::: playlistContent ::: List("#EXT-X-ENDLIST")
 
     val playlistString = playlist.mkString("\n")
-//    println(playlistString)
 
     Ok(playlistString)
   }
