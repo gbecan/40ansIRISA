@@ -12,14 +12,15 @@ import scala.util.Random
 object Application extends Controller {
 
   // List variation points
-  val vpDir = new File("public/videos")
+
+  val vpDir = new File("resources/videos")
   val vps = vpDir.listFiles(new FileFilter {
     override def accept(file: File): Boolean = file.isDirectory
   }).map(_.getName).toList.sorted
 
   // List videos by variation point
   val videosByVP = for (vp <- vps) yield {
-    val dir = new File("public/videos/" + vp)
+    val dir = new File("resources/videos/" + vp)
 
     val files = dir.listFiles(new FilenameFilter {
       override def accept(file: File, s: String): Boolean = s.endsWith(".ts")
@@ -52,7 +53,7 @@ object Application extends Controller {
       List(
         "#EXT-X-DISCONTINUITY",
         "#EXTINF:" + length,
-        "assets/videos/" + vp + "/" + name
+        "resources/videos/" + vp + "/" + name
       )
     }).flatten
     val playlist = List("#EXTM3U") ::: playlistContent ::: List("#EXT-X-ENDLIST")
@@ -61,6 +62,10 @@ object Application extends Controller {
 //    println(playlistString)
 
     Ok(playlistString)
+  }
+
+  def getResource(file : String) = Action {
+    Ok.sendFile(new File("resources/" + file))
   }
 
 }
