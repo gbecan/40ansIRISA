@@ -45,6 +45,8 @@ object Application extends Controller {
       (vp, chosenVideo._1, chosenVideo._2)
     }
 
+    println(configuration)
+
     // Create the playlist corresponding to the configuration
     val playlistContent = (for((vp, name, length) <- configuration) yield {
       List(
