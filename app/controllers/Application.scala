@@ -25,7 +25,7 @@ object Application extends Controller {
       }
 
 
-    Logger.info(configuration)
+    Logger.info(configuration.mkString(", "))
 
     // Create the playlist corresponding to the configuration
     val playlistContent = (for((vp, name, length) <- configuration) yield {
