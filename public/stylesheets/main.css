@@ -12,12 +12,14 @@ body {
     border-radius: 8px;
 }
 
-.row {
-    margin-top: 20px;
+.btn {
+    margin-bottom: 15px;
 }
 
 .title {
     color: white;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .video-player {

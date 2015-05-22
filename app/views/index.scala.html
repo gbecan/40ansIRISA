@@ -4,9 +4,18 @@
     <div class="container" ng-controller="ConfiguratorCtrl">
 
         <div class="row">
-            <h1 class="text-center title" >
-                <img src='@routes.Assets.at("images/logo40ansWeb.png")' height="80px"> - Vidéo personnalisée
-            </h1>
+            <div class="text-center">
+                <img src='@routes.Assets.at("images/logo40ansWeb.png")' height="80px">
+                <h1 class="title" >40 ans et pas une ride</h1>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="text-center">
+                <button class="btn btn-primary btn-lg " ng-click="generate()">Je découvre mon épisode...</button>
+            </div>
+
         </div>
 
         <div class="row">
@@ -21,14 +30,6 @@
 
         </div>
 
-
-        <div class="row">
-
-            <div class="text-center">
-                <button class="btn btn-primary btn-lg " ng-click="generate()">Générer une autre vidéo</button>
-            </div>
-
-        </div>
 
         @*<div class="row">*@
             @*<img src='@routes.Assets.at("images/SloganPageDesVideos.png")'>*@

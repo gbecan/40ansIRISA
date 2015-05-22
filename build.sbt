@@ -1,3 +1,5 @@
+import play.PlayScala
+
 name := """40ansIRISA"""
 
 version := "1.0-SNAPSHOT"
