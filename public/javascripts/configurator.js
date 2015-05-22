@@ -1,10 +1,6 @@
-/**
- * Created by gbecan on 05/11/14.
- */
+var irisaApp = angular.module('irisaApp', []);
 
-var brefApp = angular.module('brefApp', []);
-
-brefApp.controller('ConfiguratorCtrl', function ($scope, $http) {
+irisaApp.controller('ConfiguratorCtrl', function ($scope, $http) {
 
     $scope.activated = false;
 

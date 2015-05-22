@@ -11,6 +11,25 @@ import scala.util.Random
 
 object Application extends Controller {
 
+  // List variation points
+  val vpDir = new File("public/videos")
+  val vps = vpDir.listFiles(new FileFilter {
+    override def accept(file: File): Boolean = file.isDirectory
+  }).map(_.getName).toList.sorted
+
+  // List videos by variation point
+  val videosByVP = for (vp <- vps) yield {
+    val dir = new File("public/videos/" + vp)
+
+    val files = dir.listFiles(new FilenameFilter {
+      override def accept(file: File, s: String): Boolean = s.endsWith(".ts")
+    }).toList
+
+    val fileNames = files.map(file => file.getName).map(name => name.substring(0, name.length - 3))
+    val videos = fileNames.map(name => (name + ".ts", Source.fromFile(dir.getAbsolutePath + "/" + name + ".txt").mkString))
+
+    (vp, videos)
+  }
 
 
 
@@ -19,25 +38,6 @@ object Application extends Controller {
   }
 
   def getPlaylist() = Action { request =>
-
-    val vpDir = new File("public/videos")
-    val vps = vpDir.listFiles(new FileFilter {
-      override def accept(file: File): Boolean = file.isDirectory
-    }).map(_.getName).toList.sorted
-
-    // List videos by variation point
-    val videosByVP = for (vp <- vps) yield {
-      val dir = new File("public/videos/" + vp)
-
-      val files = dir.listFiles(new FilenameFilter {
-        override def accept(file: File, s: String): Boolean = s.endsWith(".ts")
-      }).toList
-
-      val fileNames = files.map(file => file.getName).map(name => name.substring(0, name.length - 3))
-      val videos = fileNames.map(name => (name + ".ts", Source.fromFile(dir.getAbsolutePath + "/" + name + ".txt").mkString))
-
-      (vp, videos)
-    }
 
     // Choose a configuration
     val configuration = for ((vp, videos) <- videosByVP) yield {
@@ -59,10 +59,6 @@ object Application extends Controller {
 //    println(playlistString)
 
     Ok(playlistString)
-  }
-
-  def getResource(file : String) = Action {
-    Ok.sendFile(new File("resources/" + file))
   }
 
 }
