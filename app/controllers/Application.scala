@@ -1,38 +1,14 @@
 package controllers
 
-import java.io.{FileFilter, FilenameFilter, File}
+import java.io.File
 
-import play.api._
 import play.api.mvc._
-import play.api.libs.json.Json
 
-import scala.io.Source
 import scala.util.Random
 
 object Application extends Controller {
 
-  // List variation points
-
-  val vpDir = new File("resources/videos")
-  val vps = vpDir.listFiles(new FileFilter {
-    override def accept(file: File): Boolean = file.isDirectory
-  }).map(_.getName).toList.sorted
-
-  // List videos by variation point
-  val videosByVP = for (vp <- vps) yield {
-    val dir = new File("resources/videos/" + vp)
-
-    val files = dir.listFiles(new FilenameFilter {
-      override def accept(file: File, s: String): Boolean = s.endsWith(".ts")
-    }).toList
-
-    val fileNames = files.map(file => file.getName).map(name => name.substring(0, name.length - 3))
-    val videos = fileNames.map(name => (name + ".ts", Source.fromFile(dir.getAbsolutePath + "/" + name + ".txt").mkString))
-
-    (vp, videos)
-  }
-
-
+  var videosByVP : List[(String, List[(String, String)])] = Nil
 
   def index = Action {
     Ok(views.html.index())
@@ -65,7 +41,7 @@ object Application extends Controller {
   }
 
   def getResource(file : String) = Action {
-    Ok.sendFile(new File("resources/" + file))
+    Ok.sendFile(new File("/var/www/resources/" + file))
   }
 
 }
