@@ -18,7 +18,7 @@ object Application extends Controller {
   def getPlaylist() = Action { request =>
 
     // Choose a configuration
-    val bonus = Random.nextFloat() < 0.1
+    val bonus = Random.nextFloat() < 0.01
     val configuration = for ((vp, videos) <- videosByVP if (!bonus && vp != "bonus") || (bonus && vp == "bonus")) yield {
         val chosenVideo = Random.shuffle(videos).head
         (vp, chosenVideo._1, chosenVideo._2)

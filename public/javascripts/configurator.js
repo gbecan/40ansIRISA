@@ -21,7 +21,6 @@ irisaApp.controller('ConfiguratorCtrl', function ($scope, $http) {
 
         if ($scope.hasFlash) { // Flash
 
-            console.log("flash player");
             flowplayer("player", "assets/flash/flowplayer.swf", {
                 wmode: 'direct',
                 plugins: {
@@ -52,7 +51,7 @@ irisaApp.controller('ConfiguratorCtrl', function ($scope, $http) {
                     autoBuffering: true
                 },
                 log: {
-                    level: 'debug',
+                    level: 'none',
                     filter: 'org.flowplayer.controller.*'
                 }
             });
