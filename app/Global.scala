@@ -43,6 +43,8 @@ object Global extends GlobalSettings {
 
       }
 
+      Logger.info(videosByVP.mkString("\n"))
+
       Application.videosByVP = videosByVP
     }
 
