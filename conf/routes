@@ -5,6 +5,7 @@
 # Home page
 GET        /                    controllers.Application.index
 
+GET        /generate-playlist   controllers.Application.generatePlaylist()
 GET        /get-playlist        controllers.Application.getPlaylist()
 
 # Map static resources from the /public folder to the /assets URL path

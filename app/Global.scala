@@ -37,7 +37,7 @@ object Global extends GlobalSettings {
         }).toList
 
         val fileNames = files.map(file => file.getName).map(name => name.substring(0, name.length - 3))
-        val videos = fileNames.map(name => (name + ".ts", Source.fromFile(dir.getAbsolutePath + "/" + name + ".txt").mkString))
+        val videos = fileNames.map(name => (name + ".ts", Source.fromFile(dir.getAbsolutePath + "/" + name + ".txt").getLines().mkString))
 
         (vp, videos)
 

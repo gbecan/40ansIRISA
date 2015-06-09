@@ -22,6 +22,11 @@ body {
     margin-bottom: 15px;
 }
 
+.counter {
+    color: white;
+    font-size: large;
+}
+
 .video-player {
     margin: auto;
     display: block;

@@ -16,48 +16,53 @@ irisaApp.controller('ConfiguratorCtrl', function ($scope, $http) {
         $scope.activated = true;
 
 
-        var playlistURL = "get-playlist";
+        $http.get("/generate-playlist").success(function (data) {
+
+            $scope.counter = data.counter;
+            var playlistURL = data.playlistURL;
 
 
-        if ($scope.hasFlash) { // Flash
+            if ($scope.hasFlash) { // Flash
 
-            flowplayer("player", "assets/flash/flowplayer.swf", {
-                wmode: 'direct',
-                plugins: {
-                    httpstreaming: {
-                        url: 'assets/flash/flashlsFlowPlayer.swf',
-                        hls_debug : false,
-                        hls_debug2 : false,
-                        hls_lowbufferlength : 3,
-                        hls_minbufferlength : 5,
-                        hls_maxbufferlength : 0,
-                        hls_startfromlevel : -1,
-                        hls_seekfromlevel : -1,
-                        hls_live_flushurlcache : false,
-                        hls_seekmode : "ACCURATE",
-                        hls_fragmentloadmaxretry : -1,
-                        hls_manifestloadmaxretry : -1,
-                        hls_capleveltostage : false,
-                        hls_maxlevelcappingmode : "downscale"
+                flowplayer("player", "assets/flash/flowplayer.swf", {
+                    wmode: 'direct',
+                    plugins: {
+                        httpstreaming: {
+                            url: 'assets/flash/flashlsFlowPlayer.swf',
+                            hls_debug : false,
+                            hls_debug2 : false,
+                            hls_lowbufferlength : 3,
+                            hls_minbufferlength : 5,
+                            hls_maxbufferlength : 0,
+                            hls_startfromlevel : -1,
+                            hls_seekfromlevel : -1,
+                            hls_live_flushurlcache : false,
+                            hls_seekmode : "ACCURATE",
+                            hls_fragmentloadmaxretry : -1,
+                            hls_manifestloadmaxretry : -1,
+                            hls_capleveltostage : false,
+                            hls_maxlevelcappingmode : "downscale"
+                        }
+                    },
+                    clip: {
+                        accelerated: true,
+                        url: playlistURL,
+                        urlResolvers: "httpstreaming",
+                        lang: "fr",
+                        provider: "httpstreaming",
+                        autoPlay: false,
+                        autoBuffering: true
+                    },
+                    log: {
+                        level: 'none',
+                        filter: 'org.flowplayer.controller.*'
                     }
-                },
-                clip: {
-                    accelerated: true,
-                    url: playlistURL,
-                    urlResolvers: "httpstreaming",
-                    lang: "fr",
-                    provider: "httpstreaming",
-                    autoPlay: false,
-                    autoBuffering: true
-                },
-                log: {
-                    level: 'none',
-                    filter: 'org.flowplayer.controller.*'
-                }
-            });
+                });
 
-        } else { // HTML5
-            console.log("Error: Flash not supported");
-        }
+            } else { // HTML5
+                console.log("Error: Flash not supported");
+            }
+        });
+
     };
 });

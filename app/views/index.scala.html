@@ -1,3 +1,4 @@
+@(counter : Int)
 
 @main {
 
@@ -17,6 +18,7 @@
                     <span ng-if="!activated">@Messages("index.button.first")</span>
                     <span ng-if="activated">@Messages("index.button.other")</span>
                 </button>
+                <p class="counter" ng-init="counter=@counter">@{Messages("index.counter.start")} {{counter}} @Messages("index.counter.end")</p>
             </div>
 
         </div>
