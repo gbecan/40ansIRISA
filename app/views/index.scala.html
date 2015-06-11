@@ -23,7 +23,14 @@
 
         </div>
 
+
+
+
         <div class="row">
+
+            <div class="error" ng-show="!hasFlash">
+                <p>@Messages("index.noflash")</p>
+            </div>
 
             <div class="text-center" ng-show="!activated">
                 <img src='@routes.Assets.at("images/visuel40ans-scale.png")' class="video-format"/>
@@ -33,13 +40,8 @@
                 <a class="video-player video-format" id="player"></a>
             </div>
 
+
         </div>
-
-
-        @*<div class="row">*@
-            @*<img src='@routes.Assets.at("images/SloganPageDesVideos.png")'>*@
-        @*</div>*@
-
 
     </div>
 
