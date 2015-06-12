@@ -28,7 +28,8 @@ object Application extends Controller {
       (vpIndex, videoIndex)
     }
 
-    val currentCounter = nbOfGeneratedEpisodes.get()
+    val currentCounter = nbOfGeneratedEpisodes.incrementAndGet()
+    Logger.info(currentCounter.toString)
 
     val playlistURL = "get-playlist?" + configuration.map(vp => "vp" + vp._1 + "=" + vp._2).mkString("&")
 
@@ -70,6 +71,8 @@ object Application extends Controller {
       }
     }).flatten
 
+    Logger.info(configuration.map(_._2).mkString(", "))
+
     // Create the playlist corresponding to the configuration
     val playlistContent = (for((vp, name, length) <- configuration) yield {
       List(
@@ -81,11 +84,6 @@ object Application extends Controller {
     val playlist = List("#EXTM3U") ::: playlistContent ::: List("#EXT-X-ENDLIST")
 
     val playlistString = playlist.mkString("\n")
-
-    val currentCounter = nbOfGeneratedEpisodes.incrementAndGet()
-
-    Logger.info(configuration.map(_._2).mkString(", "))
-    Logger.info(currentCounter.toString)
 
     Ok(playlistString)
   }
