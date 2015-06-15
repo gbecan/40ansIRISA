@@ -29,7 +29,7 @@ object Application extends Controller {
     }
 
     val currentCounter = nbOfGeneratedEpisodes.incrementAndGet()
-    Logger.info(currentCounter.toString)
+    Logger.info(request.remoteAddress + " - " + currentCounter.toString)
 
     val playlistURL = "get-playlist?" + configuration.map(vp => "vp" + vp._1 + "=" + vp._2).mkString("&")
 
