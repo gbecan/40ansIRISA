@@ -1,4 +1,5 @@
 import java.io.{FilenameFilter, FileFilter, File}
+import java.util.concurrent.atomic.AtomicInteger
 
 import controllers.Application
 import play.Logger
@@ -15,6 +16,21 @@ object Global extends GlobalSettings {
 
   override def onStart(app: Application) {
     Logger.info("starting")
+
+    // Initialize view counter
+    val initCounterFile = new File("/var/www/resources/view_counter.txt")
+    if (initCounterFile.exists()) {
+      val initCounter = try {
+        val fileContent = Source.fromFile(initCounterFile).mkString.replaceAll("\\s", "")
+        println(fileContent)
+        fileContent.toInt
+      } catch {
+        case e : NumberFormatException => 0
+      }
+      Logger.info("init counter = " + initCounter)
+      Application.nbOfGeneratedEpisodes = new AtomicInteger(initCounter)
+    }
+
 
     // List variation points
     val vpDir = new File("/var/www/resources/videos")
